@@ -1,0 +1,101 @@
+
+
+<header class="flex items-center justify-between px-6 py-4 bg-pink-100">
+    <!-- Left Circle with Text -->
+    <div class="flex items-center">
+        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-pink-300 flex items-center justify-center">
+            <span class="text-white font-bold">AY</span>
+        </div>
+    </div>
+
+    <!-- Right Side Content -->
+    <div class="flex items-center space-x-6 md:space-x-12">
+        <!-- Menu Text -->
+        <div class="text-black text-lg md:text-xl">Menu</div>
+
+        <!-- Hamburger Menu -->
+        <div class="relative">
+            <button id="menu-button" class="w-6 h-6 md:w-8 md:h-8 flex flex-col justify-between items-center focus:outline-none">
+                <span class="block w-full h-px bg-black"></span>
+                <span class="block w-full h-px bg-black"></span>
+                <span class="block w-full h-px bg-black"></span>
+            </button>
+            <!-- Dropdown Menu -->
+            <div id="menu-items" class="hidden absolute right-0 mt-2 w-32 md:w-40 bg-white shadow-lg rounded-lg py-2">
+                <a href="#" class="block px-4 py-2 text-black hover:bg-gray-200">Home</a>
+                <a href="#" class="block px-4 py-2 text-black hover:bg-gray-200">About</a>
+                <a href="#" class="block px-4 py-2 text-black hover:bg-gray-200">Services</a>
+                <a href="#" class="block px-4 py-2 text-black hover:bg-gray-200">Contact</a>
+            </div>
+        </div>
+
+        <!-- Let's Talk Button -->
+        <a id="open-modal" href="#" class="flex items-center cursor-pointer">
+            <span class="text-black text-lg md:text-xl mr-2 md:mr-4">Let's talk</span>
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-red-500 flex items-center justify-center">
+                <!-- Icon or text inside the circle -->
+            </div>
+        </a>
+    </div>
+</header>
+<!-- Modal Overlay -->
+<div id="modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <!-- Modal Content -->
+    <div id="modal-content" class="bg-white rounded-lg p-8 transform scale-90 opacity-0 transition-transform transition-opacity duration-300">
+        <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+        <form>
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700">Name</label>
+                <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300" placeholder="Your Name">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700">Email</label>
+                <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300" placeholder="Your Email">
+            </div>
+            <div class="mb-4">
+                <label for="message" class="block text-gray-700">Message</label>
+                <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300" placeholder="Your Message"></textarea>
+            </div>
+            <div class="flex justify-end">
+                <button id="close-modal" type="button" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 mr-2">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const openModal = document.getElementById('open-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const modalContent = document.getElementById('modal-content');
+
+    openModal.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalOverlay.classList.remove('hidden');
+        setTimeout(() => {
+            modalContent.classList.remove('opacity-0', 'scale-90');
+            modalContent.classList.add('opacity-100', 'scale-100');
+        }, 100);
+    });
+
+    closeModal.addEventListener('click', () => {
+        modalContent.classList.remove('opacity-100', 'scale-100');
+        modalContent.classList.add('opacity-0', 'scale-90');
+        setTimeout(() => {
+            modalOverlay.classList.add('hidden');
+        }, 300);
+    });
+
+    // Close the modal when clicking outside of it
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            closeModal.click();
+        }
+    });
+
+       document.getElementById('menu-button').addEventListener('click', function () {
+        var menuItems = document.getElementById('menu-items');
+        menuItems.classList.toggle('hidden');
+    });
+</script>
